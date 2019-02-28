@@ -41,54 +41,17 @@ class MyHomePageState extends State<MyHomePage>
   @override
   void initState() {
     super.initState();
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(seconds: 2));
-    _opacity = Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-        parent: _animationController,
-        curve: Interval(0.0, 0.1, curve: Curves.ease)));
-    _width = Tween<double>(begin: 80, end: 140).animate(CurvedAnimation(
-        parent: _animationController,
-        curve: Interval(0.125, 0.25, curve: Curves.ease)));
-    _height = Tween<double>(begin: 80, end: 140).animate(CurvedAnimation(
-        parent: _animationController,
-        curve: Interval(0.25, 0.375, curve: Curves.ease)));
-    _padding = Tween<EdgeInsets>(
-            begin: EdgeInsets.only(bottom: 5), end: EdgeInsets.only(bottom: 80))
-        .animate(CurvedAnimation(
-            parent: _animationController,
-            curve: Interval(0.375, 0.4, curve: Curves.ease)));
-    _borderRadius = BorderRadiusTween(
-            begin: BorderRadius.circular(4), end: BorderRadius.circular(70))
-        .animate(CurvedAnimation(
-            parent: _animationController,
-            curve: Interval(0.4, 0.525, curve: Curves.ease)));
-    _color = ColorTween(begin: Colors.indigo[100], end: Colors.green).animate(
-        CurvedAnimation(
-            parent: _animationController,
-            curve: Interval(0.525, 0.65, curve: Curves.ease)));
+    //TODO: 1: Initialize the animation Controller and Animation
+    //TODO: 2: Forward the animation
+    //TODO: 5: Remove The Forward Animation
   }
 
+  //TODO: 3: Defining the Animating Object
   Widget animatingObject() {
     return AnimatedBuilder(
-        animation: _animationController,
-        builder: (context, child) => Container(
-              padding: _padding.value,
-              alignment: Alignment.bottomCenter,
-              child: Opacity(
-                opacity: _opacity.value,
-                child: Container(
-                  alignment: Alignment.bottomCenter,
-                  height: _height.value,
-                  width: _width.value,
-                  padding: _padding.value,
-                  decoration: BoxDecoration(
-                    borderRadius: _borderRadius.value,
-                    border: Border.all(color: Colors.indigo[300], width: 3),
-                    color: _color.value,
-                  ),
-                ),
-              ),
-            ));
+      animation: _animationController,
+      builder: (context, child) => Placeholder(),
+    );
   }
 
   @override
@@ -101,27 +64,18 @@ class MyHomePageState extends State<MyHomePage>
           children: <Widget>[
             Center(
               child: Container(
-                  height: 300,
-                  width: 300,
-                  decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.1),
-                      border: Border.all(color: Colors.black.withOpacity(0.5))),
-                  child: animatingObject()),
-            ),
-            SizedBox(
-              height: 60,
-              width: 100,
-              child: RaisedButton(
-                onPressed: () {
-                  if (_animationController.isCompleted) {
-                    _animationController.reverse();
-                  } else {
-                    _animationController.forward();
-                  }
-                },
-                child: Text("START"),
+                height: 300,
+                width: 300,
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.1),
+                  border: Border.all(
+                    color: Colors.black.withOpacity(0.5),
+                  ),
+                ),
+                child: animatingObject(),
               ),
-            )
+            ),
+            ////TODO: 4: Make A Raised Button to animate
           ],
         ));
   }
